@@ -22,6 +22,10 @@ app.secret_key = os.getenv("SECRET_KEY", "dev-secret")
 def home():
     return render_template("home.html")
 
+@app.route("/careerQuiz")
+def careerQuiz():
+    return render_template("careerQuiz.html")
+
 @app.route("/jobGuide")
 def jobGuide():
     return render_template("jobGuide.html")
