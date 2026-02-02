@@ -2,7 +2,7 @@ from flask import Flask, request, jsonify, render_template, session, flash, url_
 from passlib.hash import argon2
 from dotenv import load_dotenv
 from db import supabase
-
+import os
 
 app = Flask(__name__)
 """
@@ -16,7 +16,7 @@ def chat():
     return jsonify({"reply": reply})
 """
 
-
+app.secret_key = os.getenv("SECRET_KEY", "dev-secret")
 
 @app.route("/home")
 def home():
@@ -55,7 +55,6 @@ def signIn():
             "email": email,
             "name": name,
             "password_hash": pw_hash,
-            "points": 0
         }).execute()
 
         session["user_email"] = email
