@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
 
@@ -11,6 +11,10 @@ def chat():
     reply = handle_message(msg)
     return jsonify({"reply": reply})
 
+
+@app.route("/")
+def home():
+    return render_template("home.html")
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
