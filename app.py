@@ -20,6 +20,14 @@ def signIn():
 def home():
     return render_template("home.html")
 
+@app.route("/jobGuide")
+def jobGuide():
+    return render_template("jobGuide.html")
+
+@app.route("/donate")
+def donate():
+    return render_template("donate.html")
+
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
 

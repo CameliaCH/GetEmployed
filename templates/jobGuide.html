@@ -28,28 +28,37 @@
                     {% endif %}
                 </ul>
             </nav>
-        </header>        
+        </header>  
 
-        <section>
-            <p class="center-text">Click on the <a href = "{{ url_for('jobGuide') }}">Job Guide tab</a> to get employed.</p>
-            <h2 class = "title">Our Goal</h2>
-            <p class="center-text">We aim to help people get employed.</p>
-        </section>
-        <section>
-            <br>
-            <h2 class = "title">The Founders</h2>
-            <div class="row">
-                <div class="member">
-                    <h3 class="name">Natalie Wong</h3>
-                    <img class="pic" src ="{{ url_for('static', filename = 'mypic.jpg')}}">
-                </div>
-                <div class="member">
-                    <h3 class="name">Camelia Chew</h3>
-                    <img class="pic" src ="{{ url_for('static', filename = 'camelia.jpeg')}}">
-                </div>
-            </div>
+
+        <div class="row">
             
-        </section>
+            <div class= "age">
+              <h3 class="title">Personalise</h3>
+              <ul class="winners">
+                <li>Skills / Passion / Hobbies</li>
+                <li>Career List</li>
+              </ul>
+            </div>
+            <div class= "age">
+              <h3 class="title">Learn</h3>
+              <ul  class="winners">
+                <li>Hard Skills Courses</li>
+                <li>English</li>
+                <li>Soft Skills</li>
+                <li>How to build your CV</li>
+                <li>CV Samples</li>
+              </ul>
+            </div>
+            <div class= "age">
+              <h3 class="title">Get Employed</h3>
+              <ul  class="winners">
+                <li>Build up your work experience</li>
+                <li>Specialise in your target job</li>
+                <li>Mock Interview</li>
+              </ul>
+            </div>
+          </div>
         {% include 'includes/footer.html' %}
     </body>
 </html>

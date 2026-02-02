@@ -28,28 +28,7 @@
                     {% endif %}
                 </ul>
             </nav>
-        </header>        
-
-        <section>
-            <p class="center-text">Click on the <a href = "{{ url_for('jobGuide') }}">Job Guide tab</a> to get employed.</p>
-            <h2 class = "title">Our Goal</h2>
-            <p class="center-text">We aim to help people get employed.</p>
-        </section>
-        <section>
-            <br>
-            <h2 class = "title">The Founders</h2>
-            <div class="row">
-                <div class="member">
-                    <h3 class="name">Natalie Wong</h3>
-                    <img class="pic" src ="{{ url_for('static', filename = 'mypic.jpg')}}">
-                </div>
-                <div class="member">
-                    <h3 class="name">Camelia Chew</h3>
-                    <img class="pic" src ="{{ url_for('static', filename = 'camelia.jpeg')}}">
-                </div>
-            </div>
-            
-        </section>
+        </header>  
         {% include 'includes/footer.html' %}
     </body>
 </html>
