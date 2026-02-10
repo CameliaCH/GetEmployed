@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'styles.css')}}">
+        <meta charset = "utf-8">
+        <link  rel="icon" href="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GetEmployed</title>
+    </head>
+    <body>
+        <header>
+            <a id="home" href="{{ url_for('home') }}">Home</a>
+        
+            <a href="{{ url_for('home') }}">
+                <img id="logo" alt="GetEmployed Logo" src="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
+            </a>
+        
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('jobGuide') }}">Job Guide</a></li>
+                    <li><a href="{{ url_for('donate') }}">Donate</a></li>
+        
+                    {% if session.get("user_name") %}
+                        <li class="user-tag">👤 {{ session["user_name"] }}</li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('signIn') }}">Sign In</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>       
+        <div class="tabs">
+            <button data-tab="favourites">Favourites</button>
+            <button data-tab="part-time">Part Time</button>
+            <button data-tab="specialised">Specialised</button>
+        </div>
+        <div id ="jobs-container"></div>
+        <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+
+        <script>
+        const supabase = supabase.createClient(
+            "https://rpspjasltxmfaoinagrb.supabase.co",
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwc3BqYXNsdHhtZmFvaW5hZ3JiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5Nzc0MTEsImV4cCI6MjA4NTU1MzQxMX0.hF1ZEFUbRSIu5iE_u07FYkiQRZGXsKQxPjyu5I_gn9s"
+        );
+
+        const jobsContainer = document.getElementById("jobs-container");
+        let activeTab = "all";
+        let favourites = [];
+
+        async function fetchFavourites() {
+            const { data } = await supabase
+            .from("favourites")
+            .select("job_id");
+
+            favourites = data.map(f => f.job_id);
+        }
+
+        async function fetchJobs() {
+            jobsContainer.innerHTML = "Loading...";
+
+            let query = supabase.from("jobs").select("*");
+
+            if (activeTab === "part-time") {
+            query = query.eq("job_type", "part-time");
+            }
+
+            if (activeTab === "specialised") {
+            query = query.eq("job_type", "specialised");
+            }
+
+            if (activeTab === "favourites") {
+            const { data } = await supabase
+                .from("favourites")
+                .select("jobs(*)");
+
+            renderJobs(data.map(d => d.jobs));
+            return;
+            }
+
+            const { data } = await query;
+            renderJobs(data);
+        }
+
+        function renderJobs(jobs) {
+            jobsContainer.innerHTML = "";
+
+            jobs.forEach(job => {
+            const card = document.createElement("div");
+            card.className = "job-card";
+
+            card.innerHTML = `
+                <h3>${job.title}</h3>
+                <p>${job.company}</p>
+                <button onclick="toggleFavourite('${job.id}')">
+                ${favourites.includes(job.id) ? "❤️" : "🤍"}
+                </button>
+            `;
+
+            card.onclick = () => showJobDetails(job);
+            jobsContainer.appendChild(card);
+            });
+        }
+
+        async function toggleFavourite(jobId) {
+            if (favourites.includes(jobId)) {
+            await supabase.from("favourites").delete().eq("job_id", jobId);
+            } else {
+            await supabase.from("favourites").insert({ job_id: jobId });
+            }
+
+            await fetchFavourites();
+            fetchJobs();
+        }
+
+        function showJobDetails(job) {
+            alert(job.description); 
+        }
+
+        document.querySelectorAll(".tabs button").forEach(btn => {
+            btn.onclick = () => {
+            document.querySelector(".tabs .active").classList.remove("active");
+            btn.classList.add("active");
+            activeTab = btn.dataset.tab;
+            fetchJobs();
+            };
+        });
+
+        fetchFavourites().then(fetchJobs);
+        </script>
+    </body>

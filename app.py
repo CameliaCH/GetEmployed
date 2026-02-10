@@ -5,16 +5,6 @@ from db import supabase
 import os
 
 app = Flask(__name__)
-"""
-def handle_message(msg):
-    return f"u said {msg}"
-
-@app.route("/chat",methods = ["POST"])
-def chat():
-    msg = request.json["message"]
-    reply = handle_message(msg)
-    return jsonify({"reply": reply})
-"""
 
 app.secret_key = os.getenv("SECRET_KEY", "dev-secret")
 
@@ -22,9 +12,48 @@ app.secret_key = os.getenv("SECRET_KEY", "dev-secret")
 def home():
     return render_template("home.html")
 
-@app.route("/careerQuiz")
-def careerQuiz():
-    return render_template("careerQuiz.html")
+@app.route("/explore")
+def explore():
+    user_id = session.get("user_id")
+    
+
+    tab = request.args.get("tab","part-time")
+    
+    jobs = supabase.table("jobs").select("*")
+    if tab == "part-time":
+        jobs = jobs.eq("type","part-time").execute().data
+    elif tab == "specialised":
+        jobs = jobs.eq("type","specialised").execute().data
+    elif tab == "favourites":
+        if not user_id:
+            return render_template("explore.html", jobs = None, tab = tab)
+        else:
+            favourites = supabase.table("favourites").select("job_id").eq("user_id",user_id).execute().data
+            fav_ids = [f["job_id"] for f in favourites]
+            if not fav_ids:
+                jobs = None
+            jobs = jobs.in_("id",fav_ids)
+    return render_template("explore.html", jobs = jobs, tab = tab)
+
+@app.route("/jobs")
+def jobs():
+    return render_template("jobs.html")
+
+@app.route("/job")
+def job():
+    return render_template("job.html")
+
+@app.route("/know")
+def know():
+    return render_template("know.html")
+
+@app.route("/skills")
+def skills():
+    return render_template("skills.html")
+
+@app.route("/CVexamples")
+def CVexamples():
+    return render_template("CVexamples.html")
 
 @app.route("/jobGuide")
 def jobGuide():
