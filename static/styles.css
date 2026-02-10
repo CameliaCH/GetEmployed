@@ -109,6 +109,58 @@ html, body,main {
     flex-direction: column;  
 }
 
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+    border-bottom: 2px solid transparent;
+}
+.tab.active {
+    border-bottom: 2px solid blue;
+    font-weight: bold;
+}
+
+.job-card{
+    
+    border-radius: 9px;
+    background-color: white;
+    width: 200px;
+    height: 120px;
+    padding: 5px;
+    border: 0px;
+    margin: 24px;
+    display: inline-flex;
+    align-items: center;
+    text-align:center;
+    justify-content: center;
+    color: black;
+    flex-direction: column;
+    box-shadow: 0 0 18px rgba(0,0,0,0.12);
+}
+.job-card:hover{
+    background-color: #fafafa;
+}
+.job-card h4, .job-card p{
+    margin: 5px 0
+}
+.job-card h4{
+    font-size: 25px;
+    
+}
+.job-card p{
+    font-size: 18px;
+}
+.job-card a {
+    text-decoration: none;
+    color: black;
+}
+
 .pic {
     height: 320px;
 
