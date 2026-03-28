@@ -13,7 +13,9 @@ app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024
 from blueprints.interview import interview_bp
 app.register_blueprint(interview_bp, url_prefix='/interview')
 
-
+@app.route("/interview")
+def interview():
+    return render_template("interview.html")
 @app.route("/")
 def home():
     return render_template("home.html")
