@@ -4,9 +4,15 @@ from dotenv import load_dotenv
 from db import supabase
 import os
 
+load_dotenv()
 app = Flask(__name__)
 
 app.secret_key = os.getenv("SECRET_KEY", "dev-secret")
+app.config['MAX_CONTENT_LENGTH'] = 50 * 1024 * 1024 
+
+from blueprints.interview import interview_bp
+app.register_blueprint(interview_bp, url_prefix='/interview')
+
 
 @app.route("/home")
 def home():
@@ -106,5 +112,5 @@ def logout():
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
 
-#flask --app app run --debug
+#flask --app app run --debug --port 5001
     

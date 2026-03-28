@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/interviewer.css') }}">
+  <meta charset="utf-8">
+  <link rel="icon" href="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mock Interview — GetEmployed</title>
+</head>
+<body>
+  <header>
+    <a id="home" href="{{ url_for('home') }}">Home</a>
+    <a href="{{ url_for('home') }}">
+      <img id="logo" alt="GetEmployed Logo" src="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
+    </a>
+    <nav><ul>
+      <li><a href="{{ url_for('jobGuide') }}">Job Guide</a></li>
+      <li><a href="{{ url_for('donate') }}">Donate</a></li>
+      {% if session.get('user_name') %}
+        <li class="user-tag">👤 {{ session['user_name'] }}</li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+      {% else %}
+        <li><a href="{{ url_for('signIn') }}">Sign In</a></li>
+      {% endif %}
+    </ul></nav>
+  </header>
+
+  <section>
+    <h2 class="title">Mock Interview</h2>
+    <p class="center-text">Practice your interview in English, Bahasa Melayu, or Mandarin.</p>
+  </section>
+
+  <div id="interview-container">
+
+    <!-- Language selector -->
+    <div class="interview-controls">
+      <label style="color:#122357; font-weight:bold;">Language: </label>
+      <select id="lang-select" onchange="setManualLanguage(this.value)">
+        <option value="auto">Auto-detect</option>
+        <option value="en">English</option>
+        <option value="ms">Bahasa Melayu</option>
+        <option value="zh">Mandarin 普通话</option>
+      </select>
+      <button id="reset-btn" onclick="resetInterview()">🔄 Restart</button>
+    </div>
+
+    <!-- Avatar -->
+    <div id="avatar-container">
+      <video id="avatar-video" autoplay playsinline></video>
+      <div id="avatar-placeholder">
+        <span>👤</span>
+        <p>AI Interviewer</p>
+      </div>
+    </div>
+
+    <!-- Status indicator -->
+    <div id="status-bar">
+      <span id="status-text">Starting interview...</span>
+    </div>
+
+    <!-- Mic button -->
+    <div class="mic-container">
+      <button id="mic-btn" onclick="toggleRecording()">🎙️ Speak</button>
+    </div>
+
+    <!-- Conversation transcript -->
+    <div id="transcript">
+      <h3>Conversation</h3>
+      <div id="transcript-log"></div>
+    </div>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='js/interviewer.js') }}"></script>
+  {% include 'includes/footer.html' %}
+</body>
+</html>

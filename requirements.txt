@@ -1,0 +1,25 @@
+# GetEmployed — AI Mock Interviewer
+# Generated from project dependencies
+
+# Core Flask
+flask
+python-dotenv
+werkzeug
+
+# Authentication
+passlib[argon2]
+
+# Database
+supabase
+
+# AI — Speech to Text
+openai
+
+# AI — LLM (Groq)
+groq
+
+# AI — Avatar (D-ID uses requests)
+requests
+
+# Utilities
+certifi
