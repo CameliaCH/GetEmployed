@@ -49,6 +49,69 @@ def jobs():
 def job():
     return render_template("job.html")
 
+@app.route("/quiz")
+def quiz():
+    return render_template("quiz.html")
+
+@app.route("/quiz_results", methods=["POST"])
+def quiz_results():
+
+    if "user_id" not in session:
+        return redirect(url_for("signIn"))
+
+    age = request.form.get("age")
+    language = request.form.getlist("language[]")
+    location = request.form.getlist("location[]")
+    education = request.form.get("education")
+    needs = request.form.get("needs")
+    internet = request.form.get("internet")
+    physical = request.form.get("physical")
+    preference = request.form.get("preference")
+    digital = request.form.getlist("digital[]")
+    service = request.form.getlist("service[]")
+    technical = request.form.getlist("technical[]")
+    logistics = request.form.getlist("logistics[]")
+    experience = request.form.getlist("experience[]")
+    skills = digital + service + technical + logistics + experience
+    job_list = supabase.table("jobs").select("*").eq("age",age).overlaps("languages",language).overlaps("education",education)
+    if physical =="no":
+        job_list = job_list.eq("physical",physical)
+    if internet == "no":
+        job_list = job_list.eq("internet",internet)
+    
+    
+    if needs=="income":
+        job_list = job_list.eq("needs",needs).eq("income_type","fixed")
+    job_list = job_list.order("salary", desc=True).execute().data
+    if needs=="income":
+        filtered_jobs = []
+        for job in job_list:
+            requirements = job["requirements"]
+            if all(req in skills for req in requirements):
+                filtered_jobs.append(job)
+        job_list = filtered_jobs
+    ranked_jobs = []
+    for job in job_list:
+        category = job["category"]
+    supabase.table("profile").upsert({
+       "age": age,
+       "languages": language,
+       "education":education,
+       "location":location,
+       "needs": needs,
+       "internet": internet,
+       "physical": physical,
+       "preference": preference,
+       "digital": digital,
+       "service": service,
+       "technical": technical,
+       "logistics": logistics,
+       "experience": experience,
+       "user_id": session.get("user_id")
+   }).execute()
+    return render_template("quiz_results.html", needs = needs, job_list = job_list)
+
+
 @app.route("/know")
 def know():
     return render_template("know.html")

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'styles.css')}}">
+        <meta charset = "utf-8">
+        <link  rel="icon" href="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GetEmployed</title>
+    </head>
+    <body>
+        <header>
+            <a id="home" href="{{ url_for('home') }}">Home</a>
+        
+            <a href="{{ url_for('home') }}">
+                <img id="logo" alt="GetEmployed Logo" src="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
+            </a>
+        
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('jobGuide') }}">Job Guide</a></li>
+                    <li><a href="{{ url_for('donate') }}">Donate</a></li>
+        
+                    {% if session.get("user_name") %}
+                        <li class="user-tag">👤 {{ session["user_name"] }}</li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('signIn') }}">Sign In</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>       
+        <div>
+            <h2 class="title">Profile Quiz</h2>
+            <p class="center-text">Please answer the following questions so we can recommend jobs that suit you.</p>
+            
+            <div class="progress-bar">
+                <div class="progress" id ="progress"></div>
+            </div>
+            <form id="quiz" method="POST" action="{{url_for('quiz_results')}}">
+                <fieldset class="step" data-step="1">
+                    <legend>Select your age range:</legend>
+                    <label><input type="radio" name="age" value="under18" required>Under 18</label>
+                    <label><input type="radio" name="age" value="18+">18 and above</label>
+                </fieldset>
+                <fieldset class="step" data-step="2">
+                    <legend>Which languages can you speak?</legend>
+                    <label><input type="checkbox" name="language[]" value="bm">Bahasa Melayu</label>
+                    <label><input type="checkbox" name="language[]" value="english">English</label>
+                    <label><input type="checkbox" name="language[]" value="mandarin">Mandarin</label>
+                    <label><input type="checkbox" name="language[]" value="tamil">Tamil</label>
+                    <input type="text" name="language_other" placeholder="Other (optional)">
+                </fieldset>
+                <fieldset class="step" data-step="3">
+                    <legend>Where are you looking for work in?</legend>
+                    <label><input type="checkbox" name="location[]" value="johor">Johor</label>
+                    <label><input type="checkbox" name="location[]" value="kedah">Kedah</label>
+                    <label><input type="checkbox" name="location[]" value="kelantan">Kelantan</label>
+                    <label><input type="checkbox" name="location[]" value="malacca">Malacca</label>
+                    <label><input type="checkbox" name="location[]" value="Negeri-Sembilan">Negeri Sembilan</label>
+                    <label><input type="checkbox" name="location[]" value="Pahang">Pahang</label>
+                    <label><input type="checkbox" name="location[]" value="Penang">Penang</label>
+                    <label><input type="checkbox" name="location[]" value="Perak">Perak</label>
+                    <label><input type="checkbox" name="location[]" value="Perlis">Perlis</label>
+                    <label><input type="checkbox" name="location[]" value="Selangor">Selangor</label>
+                    <label><input type="checkbox" name="location[]" value="Sabah">Sabah</label>
+                    <label><input type="checkbox" name="location[]" value="Sarawak">Sarawak</label>
+                    <label><input type="checkbox" name="location[]" value="kl">Kuala Lumpur</label>
+                    <label><input type="checkbox" name="location[]" value="Putrajaya">Putrajaya</label>
+                    <label><input type="checkbox" name="location[]" value="Labuan">Labuan</label>
+                    <input type="text" name="location_other" placeholder="Other (optional)">
+                </fieldset>
+                <fieldset class="step" data-step="4">
+                    <legend>Select your highest education level:</legend>
+                    <label><input type="radio" name="education" value="primary" required>Primary</label>
+                    <label><input type="radio" name="education" value="pmr">PMR/PT3</label>
+                    <label><input type="radio" name="education" value="spm">SPM</label>
+                    <label><input type="radio" name="education" value="none">No formal qualification</label>
+                </fieldset>
+                <fieldset class="step" data-step="5">
+                    <legend>Select the option suits you:</legend>
+                    <label><input type="radio" name="needs" value="income" required>I need immediate income</label>
+                    <label><input type="radio" name="needs" value="training">Training first is okay (no immediate income but can pay more later)</label>
+                </fieldset>
+                <fieldset class="step" data-step="6">
+                    <legend>Do you have good, stable internet access at home?</legend>
+                    <label><input type="radio" name="internet" value="yes" required>Yes</label>
+                    <label><input type="radio" name="internet" value="no">No</label>
+                </fieldset>
+                <fieldset class="step" data-step="7">
+                    <legend>Are you comfortable with physical work?</legend>
+                    <label><input type="radio" name="physical" value="yes" required>Yes</label>
+                    <label><input type="radio" name="physical" value="no">No</label>
+                </fieldset>
+                <fieldset class="step" data-step="8">
+                    <legend>Rate how much you like each type of work (1 = least, 5 = most):</legend>
+
+                    <div class="rating-group">
+                        <p>Logistics:</p>
+                        <div class="rating">
+                            <label><input type="radio" name="pref_logistics" value="1" required>1</label>
+                            <label><input type="radio" name="pref_logistics" value="2">2</label>
+                            <label><input type="radio" name="pref_logistics" value="3">3</label>
+                            <label><input type="radio" name="pref_logistics" value="4">4</label>
+                            <label><input type="radio" name="pref_logistics" value="5">5</label>
+                        </div>
+                    </div>
+
+                    <div class="rating-group">
+                        <p>Service:</p>
+                        <div class="rating">
+                            <label><input type="radio" name="pref_service" value="1" required>1</label>
+                            <label><input type="radio" name="pref_service" value="2">2</label>
+                            <label><input type="radio" name="pref_service" value="3">3</label>
+                            <label><input type="radio" name="pref_service" value="4">4</label>
+                            <label><input type="radio" name="pref_service" value="5">5</label>
+                        </div>
+                    </div>
+
+                    <div class="rating-group">
+                        <p>Digital (Computer / Desk work):</p>
+                        <div class="rating">
+                            <label><input type="radio" name="pref_digital" value="1" required>1</label>
+                            <label><input type="radio" name="pref_digital" value="2">2</label>
+                            <label><input type="radio" name="pref_digital" value="3">3</label>
+                            <label><input type="radio" name="pref_digital" value="4">4</label>
+                            <label><input type="radio" name="pref_digital" value="5">5</label>
+                        </div>
+                    </div>
+
+                    <div class="rating-group">
+                        <p>Technical (Hands-on):</p>
+                        <div class="rating">
+                            <label><input type="radio" name="pref_technical" value="1" required>1</label>
+                            <label><input type="radio" name="pref_technical" value="2">2</label>
+                            <label><input type="radio" name="pref_technical" value="3">3</label>
+                            <label><input type="radio" name="pref_technical" value="4">4</label>
+                            <label><input type="radio" name="pref_technical" value="5">5</label>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="step" data-step="9">
+                    <p>Digital Skills</p>
+                    <legend>Select things you have done before</legend>
+                    <label><input type="checkbox" name="digital[]" value="word">Microsoft Word</label>
+                    <label><input type="checkbox" name="digital[]" value="excel">Microsoft Excel</label>
+                    <label><input type="checkbox" name="digital[]" value="data">Data entry</label>
+                    <label><input type="checkbox" name="digital[]" value="social">Social media posting / management</label>
+                    <label><input type="checkbox" name="digital[]" value="canva">Basic graphic design (Canva)</label>
+                </fieldset>
+                <fieldset class="step" data-step="10">
+                    <p>Sales & Customer Service</p>
+                    <legend>Select things you have done before</legend>
+                    <label><input type="checkbox" name="service[]" value="customers">Handle customers face-to-face</label>
+                    <label><input type="checkbox" name="service[]" value="phone">Phone/email support</label>
+                    <label><input type="checkbox" name="service[]" value="cash">Operate cash register</label>
+                    <label><input type="checkbox" name="service[]" value="products">Upsell or promote products</label>
+                    <label><input type="checkbox" name="service[]" value="sewing">Sewing / tailoring</label>
+                    <label><input type="checkbox" name="service[]" value="beauty">Hair / beauty services</label>
+                </fieldset>
+                <fieldset class="step" data-step="11">
+                    <p>Technical / Hands-on</p>
+                    <legend>Select things you have done before</legend>
+                    <label><input type="checkbox" name="technical[]" value="car">Basic car repair</label>
+                    <label><input type="checkbox" name="technical[]" value="electrical">Electrical wiring</label>
+                    <label><input type="checkbox" name="technical[]" value="plumbing">Plumbing</label>
+                    <label><input type="checkbox" name="technical[]" value="painting">Painting / carpentry</label>
+                    <label><input type="checkbox" name="technical[]" value="mechanical">Mechanical / machinery operation</label>
+                </fieldset>
+                <fieldset class="step" data-step="12">
+                    <p>Logistics & Physical</p>
+                    <legend>Select things you have done before</legend>
+                    <label><input type="checkbox" name="logistics[]" value="lift">Lift heavy items</label>
+                    <label><input type="checkbox" name="logistics[]" value="packing">Packing & sorting items</label>
+                    <label><input type="checkbox" name="logistics[]" value="long">Work long hours</label>
+                    <label><input type="checkbox" name="logistics[]" value="motorcycle">Drive car/motorcycle</label>
+                    <label><input type="checkbox" name="logistics[]" value="warehouse">Operate warehouse equipment</label>
+                </fieldset>
+                <fieldset class="step" data-step="13">
+                    <p>Responsibility & Experience</p>
+                    <legend>Select things you have done before</legend>
+                    <label><input type="checkbox" name="experience[]" value="business">Helped in family business</label>
+                    <label><input type="checkbox" name="experience[]" value="care">Took care of children or elderly</label>
+                    <label><input type="checkbox" name="experience[]" value="part-time">Worked part-time before</label>
+                    <label><input type="checkbox" name="experience[]" value="online">Sold products online (Shopee, Lazada, etc.)</label>
+                </fieldset>
+                <button type="submit">Get My Roadmap</button>
+            </form>
+        </div>
+    </body>
+</html>

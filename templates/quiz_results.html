@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'styles.css')}}">
+        <meta charset = "utf-8">
+        <link  rel="icon" href="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GetEmployed</title>
+    </head>
+    <body>
+        <header>
+            <a id="home" href="{{ url_for('home') }}">Home</a>
+        
+            <a href="{{ url_for('home') }}">
+                <img id="logo" alt="GetEmployed Logo" src="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
+            </a>
+        
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('jobGuide') }}">Job Guide</a></li>
+                    <li><a href="{{ url_for('donate') }}">Donate</a></li>
+        
+                    {% if session.get("user_name") %}
+                        <li class="user-tag">👤 {{ session["user_name"] }}</li>
+                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('signIn') }}">Sign In</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>   
+        <h2>Your Career Roadmap</h2>
+        {% if needs=="income" %}
+            <p>Since you mentioned that you need immediate income, here is a roadmap designed based on your preferences to help you earn as quickly as possible.</p>
+            <h3>Phase 1: Apply and earn immediately</h3>
+            <p>Goal: Get to RM1,800–2,500/month immediately</p>
+            <p>Today, apply to at least 3 jobs below:</p>
+            <h4>Best Immediate Options for You</h4>
+            {% if job_list|length == 0 %}
+                <p>No exact matches found. Try expanding your preferences.</p>
+            {% else %}
+                {% for job in job_list[:3] %}
+                    <h5>{{job.name}}</h5>
+                    <p>Salary: RM{{job.salary}} / month</p>
+                    <p>Description: {{job.description}}</p>
+                    <p>Why this fits you: </p>
+                    <p>Apply now: (job listings link here)</p>
+                    
+                {% endfor %}
+            {% endif %}
+            
+            <h3>Phase 2: Earn more by building skills</h3>
+            <p>Goal: Choose to learn <strong>one</strong> skill to move to stable, higher paying jobs (RM3000+ per month)</p>
+            <p>Spend around 2 hours per week learning your selected skill</p>
+            <h5>Option A: (job name)</h5>
+            <p>Salary after learning: </p>
+            <p>Skills to learn:</p>
+            <p>Resources: </p>
+            <p>After learning, apply here: (list of jobs)</p>
+            <h5>Option B: (job name)</h5>
+            <p>Salary after learning: </p>
+            <p>Skills to learn:</p>
+            <p>Resources: </p>
+            <p>After learning, apply here: (list of jobs)</p>
+            <h5>Option C: (job name)</h5>
+            <p>Salary after learning: </p>
+            <p>Skills to learn:</p>
+            <p>Resources: </p>
+            <p>After learning, apply here: (list of jobs)</p>
+            <h3>Phase 3: Stability Zone</h3>
+            <p>Goal: Earn RM3,000–4,000/month and build a stable life</p>
+            <ul>
+                <li>financial advice or lifestyle tips (savings, budgeting, emergency fund)</li>
+                <li>Next steps to make more money</li>
+            </ul>
+        {% endif %}
+
+    </body>
