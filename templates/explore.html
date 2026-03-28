@@ -1,54 +1,146 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="{{ url_for('static', filename = 'styles.css')}}">
-        <meta charset = "utf-8">
-        <link  rel="icon" href="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GetEmployed</title>
-    </head>
-    <body>
-        <header>
-            <a id="home" href="{{ url_for('home') }}">Home</a>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Jobs</title>
+</head>
+<body>
+
+
+<div id="frontimage-jobs-explore"></div>
+<header>
+    <div class="menu-container">
+        <div id="menu-icon">☰</div>
+
+        <nav class="sidebar">
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="your-profile.html">Your Profile</a>
+                    <ul class="menu-dropdown">
+                        <li><a href="your-applications.html">Applications</a></li>
+                        <li><a href="ai-interview.html">Interview</a></li>
+                        <li><a href="skill-tests.html">Skill Tests</a></li>
+                        <li><a href="saved-jobs.html">Saved Jobs</a></li>
+                        <li><a href="settings.html">Settings</a></li>
+                    </ul>
+                </li>
+                <li><a href="jobs-explore.html">Find Jobs</a></li>
+                <li><a href="help.html">Help</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="home(js).html">JavaScript Version</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="func-buttons">
+        <a href="#donate" class="btn btn-donate">Donate ♡</a>
+        <a href="#login" class="btn btn-login">Login</a>
+    </div>
+    <h1 class="page-title">Jobs</h1>
+</header>
+<div class="bodydiv">
+    <h2>Find your next career opportunity.</h2>
+    <div id="job-listings">
+        <!-- Job listings will go here -->
+    </div>
+</div>
+<main class="profile-container">
+    <div class="tab-grid">
+        <a href="#job1" class="squircle">
+            <span class="squircle-text">Kakak</span>
+        </a>
+        <a href="#job2" class="squircle">
+            <span class="squircle-text">Plumber</span>
+        </a>
+        <a href="#job3" class="squircle">
+            <span class="squircle-text">Electrician</span>
+        </a>
+        <a href="#job3" class="squircle">
+            <span class="squircle-text">Jobless Bro</span>
+        </a>
+        <a href="#job1" class="squircle">
+            <span class="squircle-text">A</span>
+        </a>
+        <a href="#job2" class="squircle">
+            <span class="squircle-text">B</span>
+        </a>
+        <a href="#job3" class="squircle">
+            <span class="squircle-text">C</span>
+        </a>
+        <a href="#job3" class="squircle">
+            <span class="squircle-text">D</span>
+        </a>
+        <a href="#job3" class="squircle">
+            <span class="squircle-text">E</span>
+        </a>
+        <a href="#job3" class="squircle">
+            <span class="squircle-text">F</span>
+        </a>
+        </div>
+</main>
+
+
+<footer class="main-footer">
+    <div class="footer-container">
         
-            <a href="{{ url_for('home') }}">
-                <img id="logo" alt="GetEmployed Logo" src="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
-            </a>
-        
-            <nav>
-                <ul>
-                    <li><a href="{{ url_for('jobGuide') }}">Job Guide</a></li>
-                    <li><a href="{{ url_for('donate') }}">Donate</a></li>
-        
-                    {% if session.get("user_name") %}
-                        <li class="user-tag">👤 {{ session["user_name"] }}</li>
-                        <li><a href="{{ url_for('logout') }}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{{ url_for('signIn') }}">Sign In</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </header>       
-        <section>
-            <h2 class = "title">Explore</h2>
-            <p class="center-text">Click on each tab to learn about the different types of jobs available</p>
-        </section>
-        <div class="tabs">
-            <a href="/explore?tab=part-time" class="tab {% if tab == 'part-time' %}active{% endif %}">Part Time</a>
-            <a href="/explore?tab=specialised" class="tab {% if tab == 'specialised' %}active{% endif %}">Specialised</a>
-            <a href="/explore?tab=favourites" class="tab {% if tab == 'favourites' %}active{% endif %}">Favourites</a>
+        <div class="footer-brand">
+            <h2 class="footer-title">Get Employed</h2>
+            <p class="footer-bio">Empowering job seekers to land their dream careers through interactive tools, personalized resources, and AI-powered practice. We believe everyone deserves a fulfilling career. Get Employed is part of the Career Growth Alliance.</p>
+            
+            <div class="social-icons">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Facebook_Logo_2023.png/960px-Facebook_Logo_2023.png" alt="Facebook" class="icon"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/960px-LinkedIn_icon.svg.png" alt="LinkedIn" class="icon"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/960px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube" class="icon"></a>
+                <a href="#"><img src="https://images.seeklogo.com/logo-png/34/2/tiktok-logo-png_seeklogo-340606.png" alt="TikTok" class="icon"></a>
+            </div>
         </div>
 
-        <ul>
-            {% if jobs %}
-                {% for job in jobs %}
-                <a href="{{url_for('job')}}"><div class="job-card">
-                    
-                        <h4>{{job.name}}</h4>
-                        <p>{{job.description}}</p>
-                </div></a>
-                {% endfor %}
-            {% else %}
-                <li>None</li>
-            {% endif %}
-        </ul>
+        <nav class="footer-links">
+            <h3>Solutions</h3>
+            <ul>
+                <li><a href="#">Resume Builder</a></li>
+                <li><a href="#">Interview Prep</a></li>
+                <li><a href="#">Job Alerts</a></li>
+                <li><a href="#">Career Coaching</a></li>
+                <li><a href="#">Skills Assessment</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </nav>
+
+        <nav class="footer-links">
+            <h3>Our Company</h3>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Our Team</a></li>
+                <li><a href="#">Partners</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press Kit</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <address>
+                <p>Career Portal Support LLC</p>
+                <p>123 Future Avenue, Tech City, CA 94000</p>
+                <p>Support: 9am – 5pm (Mon - Fri)</p>
+                <p>Phone: (555) GET-JOBS</p>
+                <a href="#" class="contact-link">Contact Support Now →</a>
+            </address>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Get Employed. All rights reserved.</p>
+        <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Sitemap</a>
+        </nav>
+    </div>
+</footer>
+</body>
+</html>
