@@ -1,68 +1,136 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Get Employed</title>
+</head>
+<body>
 
-{% block title %}GetEmployed — Start Your Career{% endblock %}
-{% block page_title %}GetEmployed{% endblock %}
 
-{% block frontimage %}
 <div id="frontimage"></div>
-{% endblock %}
-
-{% block content %}
+<header>
+    <div class="menu-container">
+        <div id="menu-icon">☰</div>
+        <nav class="sidebar">
+            <ul>
+                <!------------------------------------>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="your-profile.html">Your Profile</a>
+                    <ul class="menu-dropdown">
+                        <li><a href="your-applications.html">Applications</a></li>
+                        <li><a href="ai-interview.html">Interview</a></li>
+                        <li><a href="skill-tests.html">Skill Tests</a></li>
+                        <li><a href="saved-jobs.html">Saved Jobs</a></li>
+                        <li><a href="settings.html">Settings</a></li>
+                    </ul>
+                </li>
+                <li><a href="jobs-explore.html">Find Jobs</a></li>
+                <li><a href="help.html">Help</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="home(js).html">JavaScript Version</a></li>
+                <!------------------------------------>
+            </ul>
+        </nav>
+    </div>
+    <div class="func-buttons">
+        <a href="#donate" class="btn btn-donate">Donate ♡</a>
+        <a href="#login" class="btn btn-login">Login</a>
+    </div>
+    <h1 class="page-title">Get Employed</h1>
+</header>
 <main class="bodymain">
 
-    <h2>Welcome to GetEmployed!</h2>
-    <p>Your step-by-step guide to finding work in Malaysia — no experience required.</p>
-    <a href="{{ url_for('quiz') }}" class="cta-button">Take the Career Quiz →</a>
+<h2>Welcome to Get Employed!</h2>
+<p>Your one-stop resource for job seekers. Explore our tools and tips to land your dream job.</p>
+<a href="jobs-explore.html" class="cta-button">Get Started</a>
 
-    {# ── Quick-action cards ── #}
-    <section>
-        <h2 class="title">What do you need today?</h2>
-        <main class="profile-container">
-            <div class="tab-grid">
-                <a href="{{ url_for('quiz') }}" class="squircle">
-                    <span class="squircle-text">🧭 Career Quiz</span>
-                </a>
-                <a href="{{ url_for('explore') }}" class="squircle">
-                    <span class="squircle-text">💼 Find Jobs</span>
-                </a>
-                <a href="{{ url_for('interview.interview_page') }}" class="squircle">
-                    <span class="squircle-text">🎙️ Mock Interview</span>
-                </a>
-                <a href="{{ url_for('CVexamples') }}" class="squircle">
-                    <span class="squircle-text">📄 CV Examples</span>
-                </a>
-                <a href="{{ url_for('skills') }}" class="squircle">
-                    <span class="squircle-text">🌟 Soft Skills</span>
-                </a>
-                <a href="{{ url_for('know') }}" class="squircle">
-                    <span class="squircle-text">📚 Before You Apply</span>
-                </a>
-            </div>
-        </main>
-    </section>
-
-    {# ── Success stories ── #}
-    <div class="testimonial-section">
-        <h2>Success Stories</h2>
-        <div class="testimonial">
-            <div class="testimonial-image">
-                <img src="https://plus.unsplash.com/premium_photo-1661297414288-8ed17eb1b3f1?q=80&w=1170&auto=format&fit=crop" alt="Testimonial">
-            </div>
-            <div class="testimonial-text">
-                <p class="quote">"I found a warehouse job within two weeks of using the career quiz. I never thought it could be this straightforward."</p>
-                <p class="author">— Ahmad, 19, Selangor</p>
-            </div>
+<div class="testimonial-section">
+    <h2>Success Stories</h2>
+    <div class="testimonial">
+        <div class="testimonial-image">
+            <img src="https://plus.unsplash.com/premium_photo-1661297414288-8ed17eb1b3f1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Testimonial Image 1">
         </div>
-        <div class="testimonial">
-            <div class="testimonial-text">
-                <p class="quote">"The mock interview helped me stop being so nervous. Now I have a full-time job as a customer service assistant."</p>
-                <p class="author">— Priya, 20, KL</p>
-            </div>
-            <div class="testimonial-image">
-                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=687&auto=format&fit=crop" alt="Testimonial">
-            </div>
+        <div class="testimonial-text">
+            <p class="quote">"Get Employed helped me find my dream job in just a few weeks!"</p>
+            <p class="author">- Jane Doe</p>
         </div>
     </div>
-
+    <div class="testimonial">
+        <div class="testimonial-text">
+            <p class="quote">"The personalized job recommendations were a game-changer for me."</p>
+            <p class="author">- John Smith</p>
+        </div>
+        <div class="testimonial-image">
+            <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Testimonial Image 2">
+        </div>
+    </div>
+    </div>
+</div>
 </main>
-{% endblock %}
+
+<!-- Footer -->
+<footer class="main-footer">
+    <div class="footer-container">
+        
+        <div class="footer-brand">
+            <h2 class="footer-title">Get Employed</h2>
+            <p class="footer-bio">Empowering job seekers to land their dream careers through interactive tools, personalized resources, and AI-powered practice. We believe everyone deserves a fulfilling career. Get Employed is part of the Career Growth Alliance.</p>
+            
+            <div class="social-icons">
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Facebook_Logo_2023.png/960px-Facebook_Logo_2023.png" alt="Facebook" class="icon"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/960px-LinkedIn_icon.svg.png" alt="LinkedIn" class="icon"></a>
+                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/960px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube" class="icon"></a>
+                <a href="#"><img src="https://images.seeklogo.com/logo-png/34/2/tiktok-logo-png_seeklogo-340606.png" alt="TikTok" class="icon"></a>
+            </div>
+        </div>
+
+        <nav class="footer-links">
+            <h3>Solutions</h3>
+            <ul>
+                <li><a href="#">Resume Builder</a></li>
+                <li><a href="#">Interview Prep</a></li>
+                <li><a href="#">Job Alerts</a></li>
+                <li><a href="#">Career Coaching</a></li>
+                <li><a href="#">Skills Assessment</a></li>
+                <li><a href="#">FAQ</a></li>
+            </ul>
+        </nav>
+
+        <nav class="footer-links">
+            <h3>Our Company</h3>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Our Team</a></li>
+                <li><a href="#">Partners</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press Kit</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </nav>
+
+        <div class="footer-contact">
+            <h3>Contact Us</h3>
+            <address>
+                <p>Career Portal Support LLC</p>
+                <p>123 Future Avenue, Tech City, CA 94000</p>
+                <p>Support: 9am – 5pm (Mon - Fri)</p>
+                <p>Phone: (555) GET-JOBS</p>
+                <a href="#" class="contact-link">Contact Support Now →</a>
+            </address>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2026 Get Employed. All rights reserved.</p>
+        <nav class="footer-legal-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Sitemap</a>
+        </nav>
+    </div>
+</footer>
+</body>
+</html>
