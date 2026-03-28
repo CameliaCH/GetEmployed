@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="https://voca-land.sgp1.cdn.digitaloceanspaces.com/43844/1649321779610/5d74cafd623b9289baa0332456cfdd85f7cdfe24763dfc2b2aa3d54097ace92f.jpg">
+    <title>{% block title %}GetEmployed{% endblock %}</title>
+    {% block head %}{% endblock %}
+</head>
+<body>
+
+    {# Each page can inject a hero/banner div by overriding this block #}
+    {% block frontimage %}{% endblock %}
+
+    <header>
+        {# ── Hamburger sidebar nav (from the better static design) ── #}
+        <div class="menu-container">
+            <div id="menu-icon">☰</div>
+            <nav class="sidebar">
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('quiz') }}">Career Quiz</a></li>
+                    <li><a href="{{ url_for('explore') }}">Find Jobs</a></li>
+                    <li>
+                        <a href="{{ url_for('jobGuide') }}">Job Guide</a>
+                        <ul class="menu-dropdown">
+                            <li><a href="{{ url_for('interview.interview_page') }}">Mock Interview</a></li>
+                            <li><a href="{{ url_for('skills') }}">Soft Skills</a></li>
+                            <li><a href="{{ url_for('CVexamples') }}">CV Examples</a></li>
+                            <li><a href="{{ url_for('know') }}">Before You Apply</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="{{ url_for('donate') }}">Donate ♡</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        {# ── Auth buttons — session-aware ── #}
+        <div class="func-buttons">
+            <a href="{{ url_for('donate') }}" class="btn btn-donate">Donate ♡</a>
+            {% if session.get("user_name") %}
+                <span class="user-tag">👤 {{ session["user_name"] }}</span>
+                <a href="{{ url_for('logout') }}" class="btn btn-login">Logout</a>
+            {% else %}
+                <a href="{{ url_for('signIn') }}" class="btn btn-login">Sign In</a>
+            {% endif %}
+        </div>
+
+        <h1 class="page-title">{% block page_title %}GetEmployed{% endblock %}</h1>
+    </header>
+
+    {# ── Flash messages (errors, success, etc.) ── #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-container">
+                {% for category, msg in messages %}
+                    <p class="flash-msg flash-{{ category }}">{{ msg }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    {# ── Main page content goes here ── #}
+    {% block content %}{% endblock %}
+
+    {# ── Shared footer ── #}
+    {% include 'includes/footer.html' %}
+
+    {# ── Per-page scripts (e.g. interviewer.js) ── #}
+    {% block scripts %}{% endblock %}
+
+    {# ── Sidebar toggle script — shared across all pages ── #}
+    <script>
+        const menuIcon = document.getElementById("menu-icon");
+        const sidebar  = document.querySelector(".sidebar");
+        if (menuIcon && sidebar) {
+            menuIcon.addEventListener("click", () => {
+                sidebar.classList.toggle("open");
+            });
+            // Close sidebar when clicking outside
+            document.addEventListener("click", (e) => {
+                if (!menuIcon.contains(e.target) && !sidebar.contains(e.target)) {
+                    sidebar.classList.remove("open");
+                }
+            });
+        }
+    </script>
+</body>
+</html>

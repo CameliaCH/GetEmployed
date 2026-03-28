@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+
+{% block title %}Your Career Roadmap — GetEmployed{% endblock %}
+{% block page_title %}Your Roadmap{% endblock %}
+
+{% block content %}
+<div class="bodydiv">
+    <h2 class="title">Your Personal Career Roadmap</h2>
+
+    {% if needs == "income" %}
+
+        {# ── PHASE 1 ── #}
+        <div class="roadmap-phase">
+            <h3>🚀 Phase 1 — Apply &amp; Earn Now</h3>
+            <p><strong>Goal:</strong> Get to RM1,800–2,500/month as fast as possible.</p>
+            <p>Apply to at least 3 of these jobs <strong>today</strong>:</p>
+
+            {% if job_list | length == 0 %}
+                <div class="no-results">
+                    <p>😔 No exact matches found. Try the quiz again with slightly broader preferences.</p>
+                    <a href="{{ url_for('quiz') }}" class="cta-button">Retake Quiz</a>
+                </div>
+            {% else %}
+                <div class="job-cards-grid">
+                {% for job in job_list[:3] %}
+                    <div class="job-card">
+                        <h4>{{ job.name }}</h4>
+                        <p class="salary">💰 RM{{ job.salary }} / month</p>
+                        <p>{{ job.description }}</p>
+                        {% if job.apply_url %}
+                            <a href="{{ job.apply_url }}" class="cta-button" target="_blank" rel="noopener">Apply Now →</a>
+                        {% else %}
+                            <a href="{{ url_for('explore') }}" class="cta-button">See Listings →</a>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+        {# ── PHASE 2 ── #}
+        <div class="roadmap-phase">
+            <h3>📈 Phase 2 — Skill Up &amp; Earn More</h3>
+            <p><strong>Goal:</strong> Move to RM3,000+ per month by learning one new skill.</p>
+            <p>Spend <strong>2 hours per week</strong> on the skill path that suits you best:</p>
+
+            <div class="job-cards-grid">
+                {% for job in job_list[3:6] %}
+                <div class="job-card skill-option">
+                    <h4>Option: {{ job.name }}</h4>
+                    <p class="salary">💰 Up to RM{{ job.salary }} / month after training</p>
+                    <p>{{ job.description }}</p>
+                    <a href="{{ url_for('skills') }}" class="cta-button">See Skills to Learn →</a>
+                </div>
+                {% else %}
+                    {# Fallback skill paths when not enough DB results #}
+                    <div class="job-card skill-option">
+                        <h4>Option A: Digital Admin / Data Entry</h4>
+                        <p class="salary">💰 RM2,500–3,500 / month</p>
+                        <p>Learn Microsoft Excel and data entry. Free courses available on YouTube and Google Digital Garage.</p>
+                        <a href="https://learndigital.withgoogle.com/digitalgarage" class="cta-button" target="_blank" rel="noopener">Start Learning →</a>
+                    </div>
+                    <div class="job-card skill-option">
+                        <h4>Option B: Social Media Management</h4>
+                        <p class="salary">💰 RM2,000–4,000 / month</p>
+                        <p>Learn Canva and basic content creation. Many small businesses in Malaysia need this.</p>
+                        <a href="https://www.canva.com/learn/" class="cta-button" target="_blank" rel="noopener">Start Learning →</a>
+                    </div>
+                    <div class="job-card skill-option">
+                        <h4>Option C: Customer Service / Call Centre</h4>
+                        <p class="salary">💰 RM2,500–3,200 / month</p>
+                        <p>Practice your communication skills with our mock interview tool. No prior experience needed.</p>
+                        <a href="{{ url_for('interview.interview_page') }}" class="cta-button">Practice Interview →</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        {# ── PHASE 3 ── #}
+        <div class="roadmap-phase">
+            <h3>🏠 Phase 3 — Stability Zone</h3>
+            <p><strong>Goal:</strong> Earn RM3,000–4,000/month and build a stable life.</p>
+            <ul class="winners">
+                <li>💸 <strong>Save RM200/month</strong> from your first paycheque — even a small amount builds an emergency fund</li>
+                <li>📱 Open a <strong>Touch 'n Go eWallet</strong> savings pocket for short-term goals</li>
+                <li>🎓 Look into <strong>HRDF-funded free courses</strong> to keep levelling up your skills</li>
+                <li>📋 Once stable, update your profile here and aim for a <strong>permanent role with EPF/SOCSO</strong></li>
+            </ul>
+            <a href="{{ url_for('know') }}" class="cta-button">Learn About EPF, SOCSO &amp; Your Rights →</a>
+        </div>
+
+    {% else %}
+
+        {# Training-first path #}
+        <div class="roadmap-phase">
+            <h3>🎓 Your Learning Path</h3>
+            <p>Since you're open to training first, here are roles you can grow into with the right skills:</p>
+            {% if job_list | length == 0 %}
+                <p>No matches yet — try broadening your preferences.</p>
+                <a href="{{ url_for('quiz') }}" class="cta-button">Retake Quiz</a>
+            {% else %}
+                <div class="job-cards-grid">
+                {% for job in job_list[:6] %}
+                    <div class="job-card">
+                        <h4>{{ job.name }}</h4>
+                        <p class="salary">💰 RM{{ job.salary }} / month</p>
+                        <p>{{ job.description }}</p>
+                        <a href="{{ url_for('explore') }}" class="cta-button">Explore →</a>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+
+    {% endif %}
+
+    <div style="text-align:center; margin-top: 2rem;">
+        <a href="{{ url_for('interview.interview_page') }}" class="cta-button">Practice an Interview Now →</a>
+        &nbsp;
+        <a href="{{ url_for('explore') }}" class="cta-button">Browse All Jobs →</a>
+    </div>
+</div>
+{% endblock %}
