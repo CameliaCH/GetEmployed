@@ -65,10 +65,6 @@ def jobs():
     return render_template("jobs.html")
 
 
-@app.route("/job")
-def job():
-    return render_template("job.html")
-
 
 @app.route("/quiz")
 def quiz():

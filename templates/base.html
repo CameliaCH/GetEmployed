@@ -4,7 +4,7 @@
     <title>Get Employed</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
 {% block front_image %}{% endblock %}
@@ -13,8 +13,8 @@
         <div id="menu-icon">☰</div>
         <nav class="sidebar">
             <ul>
-                <li><a href="home.html">Home</a></li>
-                <li><a href="your-profile.html">Your Profile</a>
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="#">Your Profile</a>
                     <ul class="menu-dropdown">
                         <li><a href="{{url_for('applications')}}">Applications</a></li>
                         <li><a href="{{url_for('interview')}}">Interview</a></li>
@@ -25,21 +25,18 @@
                 </li>
                 <li><a href="{{url_for('explore')}}">Find Jobs</a></li>
                 <li><a href="{{url_for('help')}}">Help</a></li>
-                <li><a href="{{url_for('about-us')}}">About Us</a></li>
+                <li><a href="{{url_for('about')}}">About Us</a></li>
             </ul>
         </nav>
     </div>
     <div class="func-buttons">
-        <a href="#donate" class="btn btn-donate">Donate ♡</a> <!--link this-->
-        <a href="#login" class="btn btn-login">Login</a>
+        <a href="{{ url_for('donate') }}" class="btn btn-donate">Donate ♡</a> <!--link this-->
+        <a href="{{ url_for('signIn') }}" class="btn btn-login">Login</a>
     </div>
     <h1 class="page-title">Get Employed</h1>
 </header>
 
-<main class="bodymain">
-    {% block main_content %}{% endblock %}
-</main>
-
+{% block main_content %}{% endblock %}
     
 <footer class="main-footer">
     <div class="footer-container">
@@ -49,10 +46,10 @@
             <p class="footer-bio">Empowering job seekers to land their dream careers through interactive tools, personalized resources, and AI-powered practice. We believe everyone deserves a fulfilling career. Get Employed is part of the Career Growth Alliance.</p>
             
             <div class="social-icons">
-                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Facebook_Logo_2023.png/960px-Facebook_Logo_2023.png" alt="Facebook" class="icon"></a>
-                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/LinkedIn_icon.svg/960px-LinkedIn_icon.svg.png" alt="LinkedIn" class="icon"></a>
-                <a href="#"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/960px-YouTube_full-color_icon_%282017%29.svg.png" alt="YouTube" class="icon"></a>
-                <a href="#"><img src="https://images.seeklogo.com/logo-png/34/2/tiktok-logo-png_seeklogo-340606.png" alt="TikTok" class="icon"></a>
+                <a href="#"><img src="{{ url_for('static', filename='images/facebook_logo.png') }}" alt="Facebook" class="icon"></a>
+                <a href="#"><img src="{{ url_for('static', filename='images/linkedin_logo.png') }}" alt="LinkedIn" class="icon"></a>
+                <a href="#"><img src="{{ url_for('static', filename='images/youtube_logo.png') }}" alt="YouTube" class="icon"></a>
+                <a href="#"><img src="{{ url_for('static', filename='images/tiktok_logo.png') }}" alt="TikTok" class="icon"></a>
             </div>
         </div>
 
@@ -71,7 +68,7 @@
         <nav class="footer-links">
             <h3>Our Company</h3>
             <ul>
-                <li><a href="#">About Us</a></li>
+                <li><a href="{{ url_for('about') }}">About Us</a></li>
                 <li><a href="#">Our Team</a></li>
                 <li><a href="#">Partners</a></li>
                 <li><a href="#">Careers</a></li>

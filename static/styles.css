@@ -443,14 +443,12 @@ img.icon {
     color: #333;
     font-weight: bold;
     
-    /* The "Squircle" Look */
     border-radius: 30%; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 
-    position: relative; /* Crucial for Part 2 */
-    overflow: hidden;    /* Clips the image/video to the squircle shape */
+    position: relative; 
+    overflow: hidden;   
     
-    /* Center the background image */
     background-size: cover;
     background-position: center;
     transition: transform 0.3s, ease;
@@ -458,19 +456,19 @@ img.icon {
 
 /* ABOUT US STYLING ------------------------------------------------------------------------------------------------------------------------- */
 .camelia-info::after {
-    background-image: url('static/images/walif.png');
+    background-image: url('images/walif.png');
 }
 
 .natalie-info::after {
-    background-image: url('static/images/joshua.png');
+    background-image: url('images/joshua.png');
 }
 
 .yushen-info::after {
-    background-image: url('static/images/ali.png');
+    background-image: url('images/ali.png');
 }
 
 .devanshi-info::after {
-    background-image: url('static/images/face-drawing.png');
+    background-image: url('images/face-drawing.png');
 }
 
 .squircle-about-us:active {
@@ -702,6 +700,13 @@ img.icon {
     cursor: pointer;
     background: #BF4646 0%;
     transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.toggle {
+    cursor: pointer;
+    color: #3b5998;
+    text-decoration: underline;
+
 }
 
 .btn-login-gradient:hover {
