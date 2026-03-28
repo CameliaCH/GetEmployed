@@ -272,7 +272,8 @@ img.icon {
     display: inline-block;
     color: white;
     text-decoration: none;
-    font-weight: bold;
+    font-style: italic;
+    text-decoration: underline;
     margin-top: 1rem;
     transition: color 0.2s;
 }
@@ -369,6 +370,14 @@ img.icon {
     height: 600px;
 }/*https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D*/
 
+#frontimage-login {
+    background-attachment: fixed;
+    background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b2ZmaWNlfGVufDB8fDB8fHww&w=1000&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+}
+
 /* TAB GRID STYLING ------------------------------------------------------------------------------------------------------------------------- */
 .tab-grid {
     display: grid;
@@ -449,19 +458,19 @@ img.icon {
 
 /* ABOUT US STYLING ------------------------------------------------------------------------------------------------------------------------- */
 .camelia-info::after {
-    background-image: url('walif.png');
+    background-image: url('static/images/walif.png');
 }
 
 .natalie-info::after {
-    background-image: url('joshua.png');
+    background-image: url('static/images/joshua.png');
 }
 
 .yushen-info::after {
-    background-image: url('ali.png');
+    background-image: url('static/images/ali.png');
 }
 
 .devanshi-info::after {
-    background-image: url('face-drawing.png');
+    background-image: url('static/images/face-drawing.png');
 }
 
 .squircle-about-us:active {
@@ -613,6 +622,134 @@ img.icon {
     background-color: #C96868; /* Or a color of your choice */
     color: white;
     border-bottom-right-radius: 4px; /* Optional: "tail" effect */
+}
+
+/* LOGIN PAGE STYLING ------------------------------------------------------------------------------------------------------------------------- */
+.login-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #7EACB5;
+    background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8b2ZmaWNlfGVufDB8fDB8fHww&w=1000&q=80');
+    background-size: cover;
+    background-position: center;
+}
+
+.login-card {
+    background-color: #FFF4EA;
+    width: 100%;
+    max-width: 450px; /* Better than 80vh for responsiveness */
+    padding: 3rem;
+    margin: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-card h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+/* 3. Underline Inputs */
+.input-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.input-group input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid #EDDCC6; /* The thin underline */
+    background-color: transparent;
+    padding: 10px 0;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus {
+    border-bottom: 2px solid #a1c4fd; /* Highlight color on click */
+}
+
+/* 4. Forgot Password Link */
+.forgot-link {
+    display: block;
+    text-align: right;
+    font-size: 0.8rem;
+    color: #999;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
+.btn-login-page {
+    width: 100%;
+    padding: 1rem;
+    margin: 2rem 0;
+    border: none;
+    border-radius: 50px; /* The pill shape from your image */
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    background: #BF4646 0%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-login-gradient:hover {
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4);
+}
+
+/* 6. Social Icons Section */
+.social-login p {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.social-icons-login {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 3rem;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.facebook { background: #3b5998; }
+.twitter { background: #1da1f2; }
+.google { background: #ea4335; }
+
+/* 7. Footer Link */
+.signup-footer p {
+    font-size: 0.8rem;
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.signup-footer a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
 }
 
 /*
