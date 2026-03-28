@@ -19,6 +19,13 @@ def interview():
 @app.route("/")
 def home():
     return render_template("home.html")
+@app.route("/settings")
+def settings():
+    return render_template("settings.html")
+
+@app.route("/your-applications")
+def applications():
+    return render_template("your-applications.html")
 
 
 @app.route("/explore")

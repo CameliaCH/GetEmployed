@@ -19,17 +19,16 @@
                 <li><a href="home.html">Home</a></li>
                 <li><a href="your-profile.html">Your Profile</a>
                     <ul class="menu-dropdown">
-                        <li><a href="your-applications.html">Applications</a></li>
+                        <li><a href="{{url_for('applications')}}">Applications</a></li>
                         <li><a href="{{url_for('interview')}}">Interview</a></li>
-                        <li><a href="skill-tests.html">Skill Tests</a></li>
-                        <li><a href="saved-jobs.html">Saved Jobs</a></li>
-                        <li><a href="settings.html">Settings</a></li>
+                        <li><a href="{{url_for('quiz')}}">Quiz</a></li>
+                        <li><a href="{{url_for('jobs')}}">Saved Jobs</a></li>
+                        <li><a href="{{url_for('settings')}}">Settings</a></li>
                     </ul>
                 </li>
-                <li><a href="jobs-explore.html">Find Jobs</a></li>
-                <li><a href="help.html">Help</a></li>
-                <li><a href="about-us.html">About Us</a></li>
-                <li><a href="home(js).html">JavaScript Version</a></li>
+                <li><a href="{{url_for('jobs-explore')}}">Find Jobs</a></li>
+                <li><a href="{{url_for('help')}}">Help</a></li>
+                <li><a href="{{url_for('about-us')}}">About Us</a></li>
                 <!------------------------------------>
             </ul>
         </nav>
